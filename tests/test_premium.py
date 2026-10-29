@@ -41,8 +41,14 @@ class UIStub:
         self.text=kwargs.get("text","")
         self.title=kwargs.get("title","")
         self.size=(375,810)
-    def add_subview(self,x):self.subviews.append(x)
-    def remove_subview(self,x):self.subviews.remove(x)
+    def add_subview(self,x):
+        x.superview=self
+        self.subviews.append(x)
+    def remove_from_superview(self):
+        if hasattr(self,"superview") and self.superview is not None:
+            self.superview.subviews.remove(self)
+            self.superview=None
+    # Deliberately no remove_subview: Pyto does not implement it.
 class Color:
     @staticmethod
     def rgb(*channels):return channels
@@ -67,10 +73,11 @@ class UiTests(unittest.TestCase):
                 app=appmodule.PremiumRemote()
                 app.worker.shutdown(wait=True)
             self.assertEqual(app.devices[0]["name"],"Mi LG")
-            for page in ("tvs","remote","apps","inputs"):
+            for page in ("tvs","remote","apps","inputs","tvs"):
                 app.page=page
                 app.draw()
                 self.assertGreater(len(app.body.subviews),1)
+                self.assertEqual(len(app.nav.subviews),4)
             app.alive=False
 
 if __name__=="__main__":unittest.main()
