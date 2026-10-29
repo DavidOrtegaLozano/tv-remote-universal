@@ -268,7 +268,7 @@ class LGController:
         return self.call("ssap://tv/channelUp" if up else "ssap://tv/channelDown")
 
     def mute(self):
-        return self.call("ssap://audio/toggleMute")
+        return self.press("MUTE")
 
     def power_off(self):
         return self.call("ssap://system/turnOff")
@@ -340,11 +340,12 @@ def start_pyto():
     def tell(msg):
         status.text = str(msg)[:85]
 
-    def dispatch(fn, success="OK"):
+    def dispatch(fn, success=None):
         def run():
             try:
                 res = fn()
-                tell(success)
+                if success is not None:
+                    tell(success)
                 return res
             except Exception as exc:
                 tell("Error: " + str(exc))
