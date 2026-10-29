@@ -75,8 +75,8 @@ class PremiumRemote:
     @mainthread
     def draw(self):
         if not self.alive:return
-        for view in list(self.body.subviews):self.body.remove_subview(view)
-        for view in list(self.nav.subviews):self.nav.remove_subview(view)
+        for view in list(self.body.subviews):view.remove_from_superview()
+        for view in list(self.nav.subviews):view.remove_from_superview()
         pages=(("⌁ TV","tvs"),("◎ Mando","remote"),("▦ Apps","apps"),("▣ HDMI","inputs"))
         for i,(title,page) in enumerate(pages):
             active=self.page==page
