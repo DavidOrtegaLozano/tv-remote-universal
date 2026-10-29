@@ -362,7 +362,7 @@ def start_pyto():
     @mainthread
     def show_page(name="remote", offset=0):
         for sub in list(controls.subviews):
-            controls.remove_subview(sub)
+            sub.remove_from_superview()
         if name == "remote":
             add_button(controls, "Apagar", 6, 0, 100, 46, controller.power_off)
             add_button(controls, "Inicio", 130, 0, 100, 46, lambda: controller.press("HOME"))
