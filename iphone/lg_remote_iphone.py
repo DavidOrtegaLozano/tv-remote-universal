@@ -358,6 +358,7 @@ def start_pyto():
         target.add_subview(button)
         return button
 
+    @mainthread
     def show_page(name="remote", offset=0):
         for sub in list(controls.subviews):
             controls.remove_subview(sub)
