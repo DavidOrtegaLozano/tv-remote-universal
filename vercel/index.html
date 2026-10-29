@@ -6,21 +6,21 @@
 <p class="lead">La conexión LG ahora se ejecuta dentro del teléfono, directamente por Wi-Fi. Esta web de Vercel es únicamente la guía de instalación: <strong>no es el mando</strong>.</p>
 <div class="grid"><section class="primary"><div class="tag">MANDO TÁCTIL</div><h2>Pyto</h2><p>La opción con botones para volumen, canales, flechas, OK, aplicaciones y HDMI. Pyto tiene prueba gratuita; después puede requerir una compra única.</p>
 <a class="button" href="https://apps.apple.com/es/app/pyto-ide/id1436650069">1 · Instalar Pyto</a>
-<a class="button secondary" href="https://raw.githubusercontent.com/DavidOrtegaLozano/tv-remote-universal/main/iphone/lg_remote_iphone.py">2 · Obtener el archivo del mando</a></section>
+<a class="button secondary" href="https://github.com/DavidOrtegaLozano/tv-remote-universal/archive/refs/heads/main.zip">2 · Descargar proyecto ZIP</a></section>
 <section><div class="tag">ALTERNATIVA GRATUITA</div><h2>a-Shell</h2><p>Utiliza el mismo controlador directamente en el iPhone, pero escribiendo órdenes en una terminal en vez de tocar botones.</p><a class="button secondary" href="https://apps.apple.com/es/app/a-shell/id1473805438">Instalar a-Shell gratis</a></section></div>
 <section><h2>Instalación en Pyto</h2><ol>
 <li>Instala Pyto en tu iPhone y permite acceso a la red local cuando iOS lo solicite.</li>
-<li>Toca «Obtener el archivo del mando». En Safari usa Compartir → Guardar en Archivos para guardar <code>lg_remote_iphone.py</code>.</li>
-<li>Abre ese archivo desde Pyto y pulsa <strong>▶ Ejecutar</strong>.</li>
-<li>En el LG busca la dirección IP en Ajustes → Red. Introduce esa IP en el mando y pulsa Conectar.</li>
-<li>Acepta en la TV el permiso de vinculación y prueba Inicio, flechas, OK y volumen.</li></ol>
+<li>Descarga el ZIP, descomprímelo en Archivos del iPhone y abre la carpeta <code>iphone</code>. Los tres archivos Python deben permanecer juntos.</li>
+<li>Desde Pyto, abre <code>iphone/LG_REMOTE_PLUS.py</code> y pulsa <strong>▶ Ejecutar</strong>. Aparecerá el nuevo mando con diseño oscuro.</li>
+<li>El mando buscará automáticamente LG en tu red. Toca el dispositivo encontrado; si no aparece, utiliza el campo de IP manual.</li>
+<li>Acepta el permiso de vinculación en tu LG y prueba Inicio, flechas, OK, volumen, Apps y HDMI.</li></ol>
 <p><strong>Ambos deben usar la misma red local</strong> y no la Wi-Fi de invitados. La clave de emparejamiento queda guardada en tu teléfono.</p></section>
 <section style="margin-top:15px"><h2>Si prefieres usar a-Shell</h2><p>Abre a-Shell en el iPhone y ejecuta estas dos líneas:</p>
 <p class="command"><code>curl -L https://raw.githubusercontent.com/DavidOrtegaLozano/tv-remote-universal/main/iphone/lg_remote_iphone.py -o lg_remote_iphone.py</code></p>
 <p class="command"><code>python3 lg_remote_iphone.py</code></p>
 <p>Podrás usar órdenes como <code>home</code>, <code>up</code>, <code>ok</code>, <code>vol+</code>, <code>ch+</code>, <code>apps</code> o <code>inputs</code>.</p></section>
 <section style="margin-top:15px"><h2>Estado y limitaciones</h2>
-<p>Se han implementado emparejamiento, mando, volumen, canales, abrir TV normal, aplicaciones instaladas, HDMI y abrir ajustes de imagen. Todavía <strong>no está probado en un LG real</strong>. Instalar apps directamente o modificar brillo con un deslizador no es compatible de forma general con el protocolo.</p>
+<p>Incluye búsqueda automática por SSDP, búsqueda por red local como alternativa, selección del LG y un mando táctil rediseñado. Se han implementado emparejamiento, volumen, canales, abrir TV normal, aplicaciones instaladas, HDMI y acceso a ajustes de imagen. Todavía <strong>no está probado en un LG real</strong>. Instalar apps directamente o modificar brillo con un deslizador no es compatible de forma general con el protocolo.</p>
 <details><summary>¿Por qué no se puede controlar directamente desde la web?</summary><p>Safari limita las conexiones WebSocket privadas inseguras o con certificados autofirmados. El código en Pyto/a-Shell utiliza directamente la red local del iPhone y evita esas restricciones. El HTML de Vercel no hace de pasarela.</p></details>
 <details><summary>¿Por qué no hay un icono de app independiente?</summary><p>Para distribuir un IPA propio en un iPhone mediante TestFlight o la App Store se necesita firma de Apple y, normalmente, Apple Developer de pago. Esta prueba ejecuta nuestro código dentro de una app para iOS ya instalada, sin Mac.</p></details>
 <p class="muted">Proyecto no oficial. <a href="https://github.com/DavidOrtegaLozano/tv-remote-universal">Código fuente en GitHub</a>.</p></section>
